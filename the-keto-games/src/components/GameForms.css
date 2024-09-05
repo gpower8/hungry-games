@@ -1,0 +1,37 @@
+.game-form {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.game-form h2 {
+    margin-top: 0;
+    color: white;
+}
+
+.game-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.game-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.game-form button:hover {
+    background-color: #45a049;
+}
