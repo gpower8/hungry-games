@@ -8,7 +8,7 @@
 
 .game-form h2 {
     margin-top: 0;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 .game-form input {
@@ -16,6 +16,7 @@
     padding: 10px;
     margin: 10px 0;
     border: none;
+    color: black;
     border-radius: 5px;
     box-sizing: border-box;
 }

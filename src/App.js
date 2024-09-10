@@ -4,6 +4,7 @@ import CreateGame from './components/CreateGame';
 import JoinGame from './components/JoinGame';
 import Lobby from './components/Lobby';
 import Game from './components/Game';
+import ToggleBar from './components/ToggleBar';
 import './App.css';
 
 const socket = io('http://localhost:3001');
@@ -18,6 +19,7 @@ function App() {
   const [winner, setWinner] = useState(null);
   const [alivePlayers, setAlivePlayers] = useState([]);
   const [characteristicSubmitted, setCharacteristicSubmitted] = useState(false);
+  const [activeOption, setActiveOption] = useState('join');
 
   useEffect(() => {
     socket.on('gameCreated', ({ roomCode, playerInfo }) => {
@@ -119,9 +121,13 @@ function App() {
       )}
       <main className="main-content">
         {gameState === 'initial' && (
-          <div className="initial-screen">
-            <JoinGame onJoinGame={joinGame} />
-            <CreateGame onCreateGame={createGame} />
+          <div className="initial-screen flex flex-col items-center justify-center h-screen">
+            <ToggleBar onToggle={(option) => setActiveOption(option)} />
+            {activeOption === 'join' ? (
+              <JoinGame onJoinGame={joinGame} />
+            ) : (
+              <CreateGame onCreateGame={createGame} />
+            )}
           </div>
         )}
         {gameState === 'lobby' && (

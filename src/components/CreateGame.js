@@ -12,7 +12,7 @@ function CreateGame({ onCreateGame }) {
 
     return (
         <form onSubmit={handleSubmit} className="game-form">
-            <h2>Create New Game</h2>
+            <h2>Select # of players</h2>
             <input
                 type="number"
                 value={numPlayers}
