@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Hungry Games
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A multiplayer, AI-narrated Hunger Games party game. The React frontend (built with [Vite](https://vite.dev/))
+talks to a Node server (`server.js`, Express + Socket.IO) that generates the story with Google Gemini.
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+- Node.js 20.19+ or 22.12+ (required by Vite)
+- A Gemini API key in a `.env` file at the project root:
 
-### `npm start`
+  ```
+  GEMINI_KEY=your-key-here
+  ```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Running locally
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Install dependencies:
 
-### `npm test`
+```sh
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Start the game server (Socket.IO on [http://localhost:3001](http://localhost:3001); override with `PORT`):
 
-### `npm run build`
+```sh
+npm run server
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+In a second terminal, start the frontend dev server on [http://localhost:3000](http://localhost:3000):
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```sh
+npm run dev
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The client connects to the socket server at `http://localhost:3001`, and the server only accepts
+Socket.IO connections from `http://localhost:3000`, so keep both ports as they are.
 
-### `npm run eject`
+## Available scripts
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `npm run dev` (or `npm start`): Vite dev server with hot reload on port 3000.
+- `npm run build`: production build into `build/`.
+- `npm run preview`: serve the production build locally on port 3000.
+- `npm run server`: run the game server (`node server.js`).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Environment variables
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Only the server reads environment variables (`GEMINI_KEY`, optional `PORT`). The frontend uses none.
+If you add client-side variables, Vite only exposes ones prefixed with `VITE_`, read through
+`import.meta.env.VITE_*` (the old Create React App `REACT_APP_*` / `process.env` convention no longer works).
